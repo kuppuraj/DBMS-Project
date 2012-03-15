@@ -45,12 +45,12 @@ function head($title)
       </tr>
 
       <tr>
-      <td>
+      <td height=\"100%\" valign=\"top\">
 	<div id=\"sidecol\">
 	side column
 	</div>
       </td>
-      <td>
+      <td height=\"100%\" valign=\"top\">
    "; 
    return $html; 
 } 
