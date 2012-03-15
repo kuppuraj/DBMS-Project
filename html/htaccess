@@ -1,2 +1,4 @@
 AddHandler cgi-script .php
 DirectoryIndex index.html index.php
+
+
