@@ -4,7 +4,7 @@
   echo head('Login'); 
 ?>
 <div id="content">
-<form name="loginform" action="login_page.php" onsubmit="return validateForm()" method="POST">
+<form name="loginform" action="checklogin.php" onsubmit="return validateForm()" method="POST">
   <table border="3" cellpadding="10" bgcolor=#f5f5f5>
     <tr><td>
     <b><i><font color=blue> Sign in </font></i></b><br></br>
@@ -13,7 +13,7 @@
         <td><b><font size="2">Username</font></b></td>
       </tr>
       <tr>
-        <td><input type="text" name="uname" maxlength="30" style="font-size: 12px;background: #F0F6D6; height: 25px; width: 300px;"/></td>
+        <td><input type="text" name="myusername" id="myusername" maxlength="30" style="font-size: 12px;background: #F0F6D6; height: 25px; width: 300px;"/></td>
       </tr>
 
       <tr height="1"></tr>
@@ -21,7 +21,7 @@
         <td><b><font size="2">Password </font></b></td>
       </tr>
       <tr>
-        <td><input type="password" name="passwd" maxlength="30" style="font-size: 12px;background: #F0F6D6;height: 25px; width: 300px;"/></td>
+        <td><input type="password" name="mypassword" id="mypassword" maxlength="30" style="font-size: 12px;background: #F0F6D6;height: 25px; width: 300px;"/></td>
       </tr>
 
       <tr height="1"></tr>

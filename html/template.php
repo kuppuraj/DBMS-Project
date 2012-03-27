@@ -35,9 +35,15 @@ function head($title)
 	   <li id=\"tabHotDeals\"><a href=\"./HotDeals.php\">Hot Deals</a></li>
 	   <li id=\"tabProfile\"><a href=\"./profile.php\">Profile</a></li>
 	   <li id=\"tabCart\"><a href=\"./Cart.php\">My Cart</a></li>
-	   <li id=\"tabHelp\"><a href=\"./help.php\">Help</a></li>
-	   <li id=\"tabLogout\"><a href=\"./logout.php\">Logout</a></li>
-	  </ul>
+	   <li id=\"tabHelp\"><a href=\"./help.php\">Help</a></li>";
+session_start();
+if(session_is_registered(myusername)){
+	   $html .= "<li id=\"tabLogout\"><a href=\"./logout.php\">Logout</a></li>";
+}
+else {
+	   $html .= "<li id=\"tabLogin\"><a href=\"./login.php\">Login</a></li>";
+}	   
+	  $html .= "</ul>
 
 	 </div><!-- /inner -->
 	</div><!--  /navigation -->
