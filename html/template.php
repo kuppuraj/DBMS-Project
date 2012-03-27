@@ -1,6 +1,7 @@
 <?php 
 function head($title) 
 { 
+   session_start();
    $html = "<html> 
    <head>
      <title>" . htmlspecialchars($title) . "</title>
@@ -25,18 +26,19 @@ function head($title)
 	    <input name=\"phrase\" id=\"phrase\" type=\"text\" size=\"18\" accesskey=\"s\"
 		   value=\"e-mart search\" onfocus=\"this.value=''\" />
 	    <input type=\"submit\" value=\"Search\" />
-	    <a href=\"Advanced\">Advanced Search</a>
-	    </div><!-- unnamed label -->
+	    <a href=\"./advanced.php\">Advanced Search</a>";
+   if (session_is_registered(myusername)) {
+	   $html .= "<a href=\"./profile.php\">". htmlspecialchars($_SESSION['user_name']) ."</a>";
+   }
+	    $html .= "</div><!-- unnamed label -->
 	   </form>
 	  </div><!-- /searcher -->
 
 	  <ul>
-	   <li id=\"tabHome\"><a href=\"./home.php\">My Home</a></li>
+	   <li id=\"tabHome\"><a href=\"./home.php\">Home</a></li>
 	   <li id=\"tabHotDeals\"><a href=\"./HotDeals.php\">Hot Deals</a></li>
-	   <li id=\"tabProfile\"><a href=\"./profile.php\">Profile</a></li>
 	   <li id=\"tabCart\"><a href=\"./Cart.php\">My Cart</a></li>
 	   <li id=\"tabHelp\"><a href=\"./help.php\">Help</a></li>";
-session_start();
 if(session_is_registered(myusername)){
 	   $html .= "<li id=\"tabLogout\"><a href=\"./logout.php\">Logout</a></li>";
 }

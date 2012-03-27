@@ -21,6 +21,7 @@ if (($row = oci_fetch_object($statement))) {
 	//var_dump($row);
 	session_register("myusername"); //login successful
 	session_register("mypassword");
+	$_SESSION["user_name"] = $myusername;
 	header("location:home.php");
  }
 //
