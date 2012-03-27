@@ -41,7 +41,7 @@ a:hover{ color: red; }
    consistency with fsf.org.  */
 .inner { margin: auto; width: 99%; max-width:74.92em; }
 
-#logo{ background-color: #d0d0d0; border-bottom: 5px solid #333; clear: both; }
+#logo{ background-color: #c0c0c0; clear: both; border-radius: 10px; margin: 0.1em}
 
 #links{ display: none !important; }
 
@@ -58,17 +58,29 @@ a:hover{ color: red; }
 
 #content:lang(ar), #content:lang(fa), #searcher:lang(he) {text-align: top;}
 
-#navigation{ background-color: #d0d0d0; border-bottom: 5px solid #333; clear: both; }
+#navigation{ background-color: #e0e0e0; border-bottom: 5px solid #333; clear: both; border-radius: 10px; margin:0.1em; left-margin:0em;}
 
 #navigation:after{ clear: both; content: ""; display: block; height: 0px; visibility: hidden; width: 0px; }
 
-#navigation ul{font-size: 0.9em; margin:  auto; padding-top: 1.1em }
+#navigation ul{font-size: 0.9em; margin:  auto; padding-top: 1.0em }
 
 #navigation li{display: inline; }
 
 #navigation li a {color: blue; text-decoration: none; font-weight: bold; padding: .9em;}
 
 #navigation li a:hover{ background-color: #d0d0d0; color: gray;  }
+
+#sidecol { background-color: #f0f0f0; border: 1px solid #333; clear: both; border-radius: 15px; margin:0.1em;}
+
+#sidecol:after{ clear: both; content: ""; display: block; height: 0px; visibility: hidden; width: 0px; }
+
+#sidecol ul{font-size: 0.9em; margin: auto; padding-left:0.1em; padding-right:0em; padding-top: 1.0em; list-style-type: none; font-style:italic; font-style:bold}
+
+#sidecol li a {color: #505050; text-decoration: none; font-weight: bold; padding: .7em;}
+
+#sidecol li a:hover{ background-color: #b0b0b0; color: white;  border-radius: 15px; font-size:115%;}
+
+#mainwindow {margin: 0.5em;}
 
 #content h2 {
  background-color: #3465a4; color: white; font-size: 2em;
@@ -83,8 +95,6 @@ a:hover{ color: red; }
 #content h5{ font-size: 1.1em; }
 
 #content h6{ font-size: 1em; }
-
-#sidecol { background-color: #fff; padding:1em; color: #000; margin-top: 0em; }  
 
 #footer { background-color: #fff; border-top: 5px solid #444; padding:1em; color: #000; margin-top: 0em; }
 
@@ -134,13 +144,13 @@ blockquote{ margin: 1em; font-style: italic; }
 
 .inline-list li { display: inline }
 
-#searcher{ float: right; margin-right: 1em; line-height: 3em; color: white; font-weight: bold; background-color: #d0d0d0; padding-left: 1em; padding-right: 1em; padding-top: 0.em;}
+#searcher{ float: right; margin-right: 1em; line-height: 2.3em; color: white; font-weight: bold; background-color: #e0e0e0; padding-left: 1em; padding-right: 1em; padding-top: 0.4em;}
 
 #searcher:lang(ar), #searcher:lang(fa), #searcher:lang(he) {float: left;}
 
 #searcher, #searcher input{ font-size: 0.8em; }
 
-#searcher a {color: blue; text-decoration: none; font-weight: bold; padding: 1em;}
+#searcher a {color: blue; text-decoration: none; font-weight: bold; padding: .9em;}
 
-#navigation a:hover{ background-color: #d0d0d0; color: gray;  }
+#navigation a:hover{ background-color: #c0c0c0; color: gray; border-radius: 15px }
 

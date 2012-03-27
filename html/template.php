@@ -26,7 +26,7 @@ function head($title)
 	    <input name=\"phrase\" id=\"phrase\" type=\"text\" size=\"18\" accesskey=\"s\"
 		   value=\"e-mart search\" onfocus=\"this.value=''\" />
 	    <input type=\"submit\" value=\"Go\" />
-	    <a href=\"./advanced.php\">Advanced Search</a>";
+	    <a href=\"./advanced.php\">Adv. Search</a>";
    if (session_is_registered(myusername)) {
 	   $html .= "<a href=\"./profile.php\">". htmlspecialchars($_SESSION['user_name']) ."</a>";
    }
@@ -54,18 +54,44 @@ else {
 
       <tr>
       <td height=\"100%\" valign=\"top\">
-	<div id=\"sidecol\">
-	side column
-	</div>
+	<div id=\"sidecol\">";
+/*In this section we will populate the categories*/
+	$html .= SideColHTML();
+	$html .= "</div>
       </td>
       <td height=\"100%\" valign=\"top\">
+       <div id=\"mainwindow\">
    ";
    return $html; 
 } 
 
+function SideColHTML()
+{
+  $thtml="<ul>";
+  require_once 'orcl_user_passwd.php';
+  $connection = oci_connect($username = $orcl_username,
+			  $password = $orcl_password,
+			  $connection_string = '//oracle.cise.ufl.edu/orcl');
+  if(!$connection) {
+	echo "oci_connect failure";
+  }
+
+  $statement = oci_parse($connection, 'SELECT categoryName  FROM cat');
+  oci_execute($statement);
+  while (($row = oci_fetch_object($statement))) {
+	  $thtml .= "<li><a href=\"./category.php\">". $row->CATEGORYNAME ."</a></li><br><br>";
+  }
+  $thtml .= "</ul>";
+  //close database
+  oci_free_statement($statement);
+  oci_close($connection);
+  return $thtml;
+}
+
 function foot() 
 { 
-  $html = "  </td>
+  $html = "</div>  
+  	   </td>
 	</tr>
   <tr height=\"40\">
   <td>
