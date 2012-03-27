@@ -25,7 +25,7 @@ function head($title)
 	    <div><label class=\"netscape4\" for=\"phrase\">Search:</label>
 	    <input name=\"phrase\" id=\"phrase\" type=\"text\" size=\"18\" accesskey=\"s\"
 		   value=\"e-mart search\" onfocus=\"this.value=''\" />
-	    <input type=\"submit\" value=\"Search\" />
+	    <input type=\"submit\" value=\"Go\" />
 	    <a href=\"./advanced.php\">Advanced Search</a>";
    if (session_is_registered(myusername)) {
 	   $html .= "<a href=\"./profile.php\">". htmlspecialchars($_SESSION['user_name']) ."</a>";
@@ -77,10 +77,9 @@ function foot()
   	<div id=\"footer\">
 	   <ul>
              <li id=\"tabAbout\"><a href=\"./About.php\">About</a></li>
-             <li id=\"tabCorporate\"><a href=\"./Corporate.php\">Corporate Information</a></li>
              <li id=\"tabCareers\"><a href=\"./Careers.php\">Careers</a></li>
              <li id=\"tabContact\"><a href=\"./Contact.php\">Contact Us</a></li>
-             <li id=\"tabLicense\"><a href=\"./License.php\">License</a></li>
+             <li id=\"tabLicense\"><a href=\"http://creativecommons.org/licenses/by-nc/3.0/\">License</a></li>
 	   </ul>
 	</div>
   </td>
