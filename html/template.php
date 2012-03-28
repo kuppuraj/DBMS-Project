@@ -68,7 +68,7 @@ else {
 function SideColHTML()
 {
   $thtml="<ul>";
-  require_once 'orcl_user_passwd.php';
+  require 'orcl_user_passwd.php';
   $connection = oci_connect($username = $orcl_username,
 			  $password = $orcl_password,
 			  $connection_string = '//oracle.cise.ufl.edu/orcl');
@@ -76,10 +76,10 @@ function SideColHTML()
 	echo "oci_connect failure";
   }
 
-  $statement = oci_parse($connection, 'SELECT categoryName  FROM cat');
+  $statement = oci_parse($connection, 'SELECT * FROM cat');
   oci_execute($statement);
   while (($row = oci_fetch_object($statement))) {
-	  $thtml .= "<li><a href=\"./category.php\">". $row->CATEGORYNAME ."</a></li><br><br>";
+	  $thtml .= '<li><a href="./category.php?cat='.$row->CATEGORYID.'&start=0">'. $row->CATEGORYNAME .'</a></li><br><br>';
   }
   $thtml .= "</ul>";
   //close database
@@ -115,4 +115,52 @@ function foot()
   </html>"; 
   return $html; 
 }
+
+/*
+ * Command is expected to provide a table with colums in following order
+ * 1. Product Name, varchar
+ * 2. Price, int
+ * 3. Description
+ * 4. Image name
+ */
+function list_products($command)
+{
+  require 'orcl_user_passwd.php';
+  $connection = oci_connect($username = $orcl_username,
+			  $password = $orcl_password,
+			  $connection_string = '//oracle.cise.ufl.edu/orcl');
+  if(!$connection) {
+    $e = oci_error();
+    echo $e['message'];
+  }
+
+  $statement = oci_parse($connection, $command);
+  oci_execute($statement);
+
+  $html='<div id="list_products">
+  <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="10">';
+
+  while (($row=oci_fetch_object($statement))) {
+    $html .= '
+     <tr>
+        <td width="50px">
+          <img src="./graphics/products/'.$row->I.'" width="50" height="50" style="top">
+        </td>
+        <td>
+          <p class="h1"><a href="./product.php?id='.$row->ID.'">'.$row->N.'</a> </p>
+          <p class="h1">'. substr($row->D,0,30).'</p>
+          <p class="h2">Price: <font color=#b22222>$'.$row->P.'</font></p>
+
+        </td>
+      </tr>';
+  }
+
+  $html .= '</table></div>';
+
+  // VERY important to close Oracle Database Connections and free statements!
+  oci_free_statement($statement);
+  oci_close($connection);
+  return $html;
+}
+
 ?>

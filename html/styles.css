@@ -41,7 +41,7 @@ a:hover{ color: red; }
    consistency with fsf.org.  */
 .inner { margin: auto; width: 99%; max-width:74.92em; }
 
-#logo{ background-color: #c0c0c0; clear: both; border-radius: 10px; margin: 0.1em}
+#logo{ background-color: #fff; clear: both; border-radius: 10px; margin: 0.1em}
 
 #links{ display: none !important; }
 
@@ -66,9 +66,22 @@ a:hover{ color: red; }
 
 #navigation li{display: inline; }
 
-#navigation li a {color: blue; text-decoration: none; font-weight: bold; padding: .9em;}
+#navigation li a {color: black; text-decoration: none; font-weight: bold; padding: .9em;}
 
-#navigation li a:hover{ background-color: #d0d0d0; color: gray;  }
+#navigation li a:hover{ background-color: #d0d0d0; color: blue; font-size:110%;}
+
+
+#list_products { font-size:background-color: #fff; clear: both;}
+
+#list_products p.h1 a{font-size: 16px; color: #0000cd; text-decoration: none; font-weight: bold; margin-top:1px; margin-bottom:1px;}
+
+#list_products p.h1 a:hover{ background-color: #f0f0f0; color: #ffA500; text-decoration:underline;}
+
+#list_products p.h1{font-size: 12px; color: #a3a3a3; text-decoration: none; margin-top:1px; margin-bottom:1px}
+
+#list_products p.h2{font-size: 12px; color: black; text-decoration: none; margin-top:1px; margin-bottom:1px}
+
+
 
 #sidecol { background-color: #f0f0f0; border: 1px solid #333; clear: both; border-radius: 15px; margin:0.1em;}
 
