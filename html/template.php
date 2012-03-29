@@ -79,7 +79,7 @@ function SideColHTML()
   $statement = oci_parse($connection, 'SELECT * FROM cat');
   oci_execute($statement);
   while (($row = oci_fetch_object($statement))) {
-	  $thtml .= '<li><a href="./category.php?cat='.$row->CATEGORYID.'&start=0">'. $row->CATEGORYNAME .'</a></li><br><br>';
+	  $thtml .= '<li><a href="./category.php?cat='.$row->CATEGORYID.'&start=1">'. $row->CATEGORYNAME .'</a></li><br><br>';
   }
   $thtml .= "</ul>";
   //close database
@@ -122,8 +122,15 @@ function foot()
  * 2. Price, int
  * 3. Description
  * 4. Image name
+ * 
+ * Parameters:
+ *	$command: Usual SQL command that should be populated to list
+ *	$start:   Refers to starting record number
+ *	$link:	  The next and prev links will be <contents of $link>NUMBER
+ *		  Where NUMBER will be dynamically generated
+ *	#elems:	  Number of records to display
  */
-function list_products($command)
+function list_products($command, $start, $link, $elems)
 {
   require 'orcl_user_passwd.php';
   $connection = oci_connect($username = $orcl_username,
@@ -134,16 +141,22 @@ function list_products($command)
     echo $e['message'];
   }
 
-  $statement = oci_parse($connection, $command);
+  /*Augument command reference: http://stackoverflow.com/questions/470542/how-do-i-limit-the-number-of-rows-returned-by-an-oracle-query
+   */
+  $newcommand='SELECT * FROM ( SELECT a.*, ROWNUM rnum FROM ('   .$command.    ')a WHERE ROWNUM <= '   .($start+$elems-1).  ' ) WHERE rnum  >= ' .$start;
+
+  $statement = oci_parse($connection, $newcommand);
   oci_execute($statement);
 
   $html='<div id="list_products">
   <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="5">';
   $color=False;
+  $count=0;
   while (($row=oci_fetch_object($statement))) {
+    $count=$count+1;
     $color=!$color;
     if ($color) {
-      $html .= '<tr style="background-color:#fAfAfA;">';
+      $html .= '<tr style="background-color:#f5f5f5;">';
     } else {
       $html .= '<tr style="background-color:#fff;">';
     }
@@ -158,13 +171,23 @@ function list_products($command)
         </td>
       </tr>';
   }
+  $html .= '<tr><td colspan="2" > <P align="center">';
 
-  $html .= '</table></div>';
+  if ($start >= $elems) { //populate prev
+     $newstart = $start-$elems;
+     $html .= '<a href="'.$link.$newstart.'">Prev</a> &nbsp; &nbsp;';
+  }
+
+  if ($count >= $elems) { //populate next
+     $newstart = $start+$elems;
+     $html .= '<a href="'.$link.$newstart.'">Next</a>';
+  }
+
+  $html .= '</p></td></tr></table></div>';
 
   // VERY important to close Oracle Database Connections and free statements!
   oci_free_statement($statement);
   oci_close($connection);
   return $html;
 }
-
 ?>
