@@ -167,3 +167,6 @@ blockquote{ margin: 1em; font-style: italic; }
 
 #navigation a:hover{ background-color: #c0c0c0; color: gray; border-radius: 15px }
 
+#pagetitle {font-family:times; color:black; font-size:22px; font-weight:bold; text-decoration:underline; font-style:italic;}
+
+#dropdown {text-align:right; width: 200px; float:right; margin-right:1em; font-size: 10px}
