@@ -138,12 +138,16 @@ function list_products($command)
   oci_execute($statement);
 
   $html='<div id="list_products">
-  <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="10">';
-
+  <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="5">';
+  $color=False;
   while (($row=oci_fetch_object($statement))) {
-    $html .= '
-     <tr>
-        <td width="50px">
+    $color=!$color;
+    if ($color) {
+      $html .= '<tr style="background-color:#fAfAfA;">';
+    } else {
+      $html .= '<tr style="background-color:#fff;">';
+    }
+    $html .= '<td width="50px">
           <img src="./graphics/products/'.$row->I.'" width="50" height="50" style="top">
         </td>
         <td>
