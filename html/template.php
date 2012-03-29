@@ -21,7 +21,7 @@ function head($title)
 	<div id=\"navigation\">
 	 <div class=\"inner\">
 	  <div id=\"searcher\">
-	   <form method=\"get\" action=\"http://www.gnu.org/cgi-bin/estseek.cgi\">
+	   <form method=\"GET\" action=\"./search.php\">
 	    <div><label class=\"netscape4\" for=\"phrase\">Search:</label>
 	    <input name=\"phrase\" id=\"phrase\" type=\"text\" size=\"18\" accesskey=\"s\"
 		   value=\"e-mart search\" onfocus=\"this.value=''\" />
@@ -145,6 +145,7 @@ function list_products($command, $start, $link, $elems)
    */
   $newcommand='SELECT * FROM ( SELECT a.*, ROWNUM rnum FROM ('   .$command.    ')a WHERE ROWNUM <= '   .($start+$elems-1).  ' ) WHERE rnum  >= ' .$start;
 
+  //var_dump($newcommand);
   $statement = oci_parse($connection, $newcommand);
   oci_execute($statement);
 
@@ -175,12 +176,12 @@ function list_products($command, $start, $link, $elems)
 
   if ($start >= $elems) { //populate prev
      $newstart = $start-$elems;
-     $html .= '<a href="'.$link.$newstart.'">Prev</a> &nbsp; &nbsp;';
+     $html .= '<a href="'.$link.$newstart.'">Prev</a> &nbsp; |';
   }
-
+ 
   if ($count >= $elems) { //populate next
      $newstart = $start+$elems;
-     $html .= '<a href="'.$link.$newstart.'">Next</a>';
+     $html .= '| &nbsp;<a href="'.$link.$newstart.'">Next</a>';
   }
 
   $html .= '</p></td></tr></table></div>';
