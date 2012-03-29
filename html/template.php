@@ -36,7 +36,7 @@ function head($title)
 
 	  <ul>
 	   <li id=\"tabHome\"><a href=\"./home.php\">Home</a></li>
-	   <li id=\"tabHotDeals\"><a href=\"./HotDeals.php\">Hot Deals</a></li>
+	   <li id=\"tabHotDeals\"><a href=\"./HotDeals.php?cat=-1\">Hot Deals</a></li>
 	   <li id=\"tabCart\"><a href=\"./Cart.php\">My Cart</a></li>
 	   <li id=\"tabHelp\"><a href=\"./help.php\">Help</a></li>";
 if(session_is_registered(myusername)){
@@ -185,6 +185,47 @@ function list_products($command, $start, $link, $elems)
   }
 
   $html .= '</p></td></tr></table></div>';
+
+  // VERY important to close Oracle Database Connections and free statements!
+  oci_free_statement($statement);
+  oci_close($connection);
+  return $html;
+}
+
+
+/*
+ * while this function generates the catelogy dropdown menu for you 
+ * It is YOUR responsibility to write the required javascript named "optionchange(this)"
+ * value set to """categoryID""", if all (all categories) is chosen value is set to """-1"""
+ *
+ * $title:  Page title variable
+ */
+function category_dropdown($title)
+{
+  require 'orcl_user_passwd.php';
+  $connection = oci_connect($username = $orcl_username,
+			  $password = $orcl_password,
+			  $connection_string = '//oracle.cise.ufl.edu/orcl');
+  if(!$connection) {
+    $e = oci_error();
+    echo $e['message'];
+  }
+  $html='<table width="100%"  border="0" cellpadding="0" cellspacing="0">
+  	 <td width="200px"><div id="pagetitle">'  .$title.  '</div></td>
+	 <td>
+	   <div id="dropdown">
+	   <label for="sort" class="netscape4" style="font-size:12px;">Sort By: &nbsp;</label>
+	   <select id="sort" title="sort" name="sort" onchange="optionchange(this)">
+             <option value="-1">ALL</option>';
+
+  $statement = oci_parse($connection, 'SELECT * FROM cat');
+  oci_execute($statement);
+
+  while (($row = oci_fetch_object($statement))) {
+	  $html .= '<option value="'  .$row->CATEGORYID.  '">'  .$row->CATEGORYNAME.  '</option>';
+  }
+
+  $html.='</select></div></td></table>';
 
   // VERY important to close Oracle Database Connections and free statements!
   oci_free_statement($statement);
