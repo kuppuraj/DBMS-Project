@@ -167,7 +167,7 @@ function list_products($command, $start, $link, $elems)
         <td>
           <p class="h1"><a href="./product.php?id='.$row->ID.'">'.$row->N.'</a> </p>
           <p class="h1">'. substr($row->D,0,30).'</p>
-          <p class="h2">Price: <font color=#b22222>$'.$row->P.'</font></p>
+          <p class="h2">Price: <font color=#b22222>$'.$row->P.'</font> &nbsp;&nbsp;&nbsp; Customer Rating: <font color=#b8860b>'.(rand(50,100)/20).'</font></p>
 
         </td>
       </tr>';
