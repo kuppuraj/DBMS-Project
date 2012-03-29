@@ -3,6 +3,19 @@
   require_once 'template.php'; 
   echo head('Login'); 
 ?>
+
+<script type="text/javascript">
+	function validateForm()
+	{
+		var x = document.forms["loginform"]["myusername"].value;
+		    var y = document.forms["loginform"]["mypassword"].value;
+		    	if (x == null || x == "" || y == null || y == ""){
+			      alert("Username and Password must be filled out");
+			      		      	  return false;
+						  	 }
+							 }
+</script>
+
 <div id="content">
 <form name="loginform" action="checklogin.php" onsubmit="return validateForm()" method="POST">
   <table border="3" cellpadding="10" bgcolor=#f5f5f5>
