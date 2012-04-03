@@ -10,7 +10,7 @@
 		var x = document.forms["loginform"]["myusername"].value;
 		    var y = document.forms["loginform"]["mypassword"].value;
 		    	if (x == null || x == "" || y == null || y == ""){
-			      alert("Username and Password must be filled out");
+			      alert("Usernames and Password must be filled out");
 			      		      	  return false;
 						  	 }
 							 }
